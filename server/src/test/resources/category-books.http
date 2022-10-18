@@ -1,0 +1,116 @@
+### Categories
+
+GET http://{{host}}:8080/{{project}}/api/categories
+Accept: application/json
+
+> {%
+client.test("Categories", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  var type = response.contentType.mimeType;
+  client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+});
+%}
+
+### Category ID
+
+GET http://{{host}}:8080/{{project}}/api/categories/1001
+Accept: application/json
+
+> {%
+client.test("Valid category ID", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  var type = response.contentType.mimeType;
+  client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+});
+%}
+
+### Invalid category ID
+
+GET http://{{host}}:8080/{{project}}/api/categories/1000
+Accept: application/json
+
+> {%
+client.test("Invalid category ID", function() {
+  client.assert(response.status === 500, "Response status is not 500");
+});
+%}
+
+### Books by category ID
+
+GET http://{{host}}:8080/{{project}}/api/categories/1001/books
+Accept: application/json
+
+> {%
+client.test("Books by valid category ID", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  var type = response.contentType.mimeType;
+  client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+});
+%}
+
+### Valid category name
+
+GET http://{{host}}:8080/{{project}}/api/categories/name/{{CategoryName}}
+Accept: application/json
+
+> {%
+client.test("Valid category name", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  var type = response.contentType.mimeType;
+  client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+});
+%}
+
+### Books by category name
+
+GET http://{{host}}:8080/{{project}}/api/categories/name/{{CategoryName}}/books
+Accept: application/json
+
+> {%
+client.test("Books by category name", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  var type = response.contentType.mimeType;
+  client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+});
+%}
+
+### Invalid category name
+
+GET http://{{host}}:8080/{{project}}/api/categories/name/NoSuchName
+Accept: application/json
+
+> {%
+client.test("Invalid category name", function() {
+  client.assert(response.status === 500, "Response status is not 500");
+});
+%}
+
+### Suggested Books by category name
+
+GET http://{{host}}:8080/{{project}}/api/categories/name/{{CategoryName}}/suggested-books
+Accept: application/json
+
+> {%
+client.test("Suggested Books by category name", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  var type = response.contentType.mimeType;
+  client.assert(response.body.length === 3)
+  client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+});
+%}
+
+### Suggested Books by category name with limit
+
+GET http://{{host}}:8080/{{project}}/api/categories/name/{{CategoryName}}/suggested-books?limit=2
+Accept: application/json
+
+> {%
+client.test("Suggested Books by category name with limit", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+  var type = response.contentType.mimeType;
+  client.assert(response.body.length === 2)
+  client.assert(type === "application/json", "Expected 'application/json' but received '" + type + "'");
+});
+%}
+
+###
