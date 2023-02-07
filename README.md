@@ -1,5 +1,4 @@
-# Online-Bookstore
-An online bookstore web application developed using the Vue.js framework, Tomcat server, and Java as the backend would provide users with a convenient way to browse, search, and purchase books online. 
+# Online-Bookstore 
 An online bookstore web application developed using the Vue.js framework, Tomcat server, and Java as the backend would
 provide users with a convenient way to browse, search, and purchase books online. The Vue.js framework would be used to
 build the frontend of the application, providing a smooth and interactive user interface for users to interact with. The
